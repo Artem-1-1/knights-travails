@@ -13,7 +13,7 @@ const chessSquare = (x, y) => {
   ]
 
 const getPredecessor = () => predecessor;
-const setPredecessor = (newPred) = { predecessor};
+const setPredecessor = (newPred) => { predecessor ||= newPred };
 
 const name = () => `${x}, ${y}`
 
@@ -23,7 +23,7 @@ const createKnightMoves = () => {
 
 const newSquareFrom = ([xOffset, yOffset]) => {
   const [newX, newY] = [xPos + xOffset, yPos + yOffset];
-  if (0 <= newX && newX < 8 && 0 <= newY && y < 8) {
+  if (0 <= newX && newX < 8 && 0 <= newY && newY < 8) {
     return chessSquare(newX, newY);
   }
 }
@@ -37,7 +37,7 @@ if (squareRegistry.has(name())) {
  }
 }
 
-export const knightTravails = (start, finish) => {
+const knightTravails = (start, finish) => {
   squareRegistry.clear();
 
   const origin = chessSquare(...start);
@@ -60,3 +60,5 @@ export const knightTravails = (start, finish) => {
   console.log("The moves were:");
   path.forEach(square => console.log(square.name()));
 } 
+
+export { knightTravails };
